@@ -122,7 +122,7 @@ const StatisticsCalculator: React.FC = () => {
     if (!value || !mean || !stdDev) throw new Error('Value, mean, and standard deviation are required')
 
     const zScore = (parseFloat(String(value)) - parseFloat(String(mean))) / parseFloat(String(stdDev))
-    const probability = (1 + Math.erf(zScore / Math.sqrt(2))) / 2
+    const probability = (1 + erf(zScore / Math.sqrt(2))) / 2
 
     return {
       zScore,
@@ -336,5 +336,22 @@ const StatisticsCalculator: React.FC = () => {
     </div>
   )
 }
+
+// Error function (erf) implementation
+const erf = (x: number): number => {
+  const sign = x >= 0 ? 1 : -1;
+  x = Math.abs(x);
+
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+
+  const t = 1.0 / (1.0 + p * x);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  return sign * y;
+};
 
 export default StatisticsCalculator 

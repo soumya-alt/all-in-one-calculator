@@ -1,4 +1,4 @@
-import React from 'react'
+// Remove the React import if it's not needed
 
 interface ShortcutInfo {
   key: string

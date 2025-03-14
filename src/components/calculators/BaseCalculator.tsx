@@ -36,24 +36,15 @@ export const useCalculator = () => {
       const result = await calculation();
       
       if (result.error) {
-        showNotification({
-          type: 'error',
-          message: result.error,
-        });
+        showNotification('error', result.error);
         return result;
       }
 
-      showNotification({
-        type: 'success',
-        message: successMessage,
-      });
+      showNotification('success', successMessage);
       return result;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An error occurred';
-      showNotification({
-        type: 'error',
-        message: errorMessage,
-      });
+      showNotification('error', errorMessage);
       return { value: null as T, error: errorMessage };
     } finally {
       setIsLoading(false);

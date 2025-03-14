@@ -14,7 +14,7 @@ const CalculatorSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const allCalculators = useMemo(() => {
+  const allCalculators: SearchResult[] = useMemo(() => {
     return calculatorCategories.flatMap(category => 
       category.routes.map(route => ({
         name: route.name,
